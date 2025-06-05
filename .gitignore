@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+vendor/
+.env
+
+# Build files
+dist/
+build/
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Cache files
+.cache/
+.temp/
+*.tmp
+
+# Test files
+coverage/
+.nyc_output/
+
+# Deployment files
+deploy/
+*.zip
+*.tar.gz
+
+# Local configuration files
+config.local.js
+config.local.json
+
