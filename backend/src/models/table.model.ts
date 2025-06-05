@@ -12,4 +12,4 @@ const Table: Schema = new Schema<ITableCell> ({
     value: { type: String, required: true}
 })
 
-export const TableCell = mongoose.model<ITableCell>('TableCell', Table);
+export default mongoose.model<ITableCell>('Table', Table);
