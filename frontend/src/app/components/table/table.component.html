@@ -1,1 +1,29 @@
-<p>table works!</p>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th *ngFor="let col of cols" (click)="highlightCol(col)">
+                {{ col }}
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let row of rows">
+            <th (click)="highlightRow(row)">{{ row }}</th>
+            <td *ngFor="let col of cols"
+                [ngClass]="{ 'highlight': isHightlighted(row, col)}"
+                (dblclick)="editCell(row, col)">
+                <span *ngIf="!isEditing(row, col)">
+                    {{ getCellValue(row, col) }}
+                </span>
+                    <input *ngIf="isEditing(row, col)"
+                         [(ngModel)]="editedValue"
+                         (blur)="saveCell(row, col)"
+                         (keydown.enter)="saveCell(row, col)"
+                         autofocus 
+                    />
+            </td>
+        </tr>
+    </tbody>
+</table>
