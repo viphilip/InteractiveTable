@@ -11,12 +11,14 @@ export const getTable = async (req: Request, res: Response) => {
 }
 
 export const initTable = async (req: Request, res: Response) => {
+    const force = req.query.force === 'true';
+
     try {
         const count = await Table.countDocuments();
-        if (count > 0) {
+        if (count > 0 && !force) {
              return res.status(200).json({ message: 'Table already initialized' });
         }
-
+        if (force) await Table.deleteMany({});
         const cells = [];
 
         for (let row = 1; row <= 10; row++) {

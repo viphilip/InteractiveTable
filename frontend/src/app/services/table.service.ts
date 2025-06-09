@@ -12,7 +12,7 @@ export interface TableCell {
   providedIn: 'root'
 })
 export class TableService {
-  private baseUrl = 'http://localhost/3000/table';
+  private baseUrl = 'http://localhost:3000/table';
 
   constructor(private http: HttpClient) {}
 
@@ -33,6 +33,13 @@ export class TableService {
       catchError(this.handleError)
     )
   }
+
+  resetTable(force = false) {
+    const url = force ? `${this.baseUrl}/init?force=true`
+                      : `${this.baseUrl}/init`;
+    return this.http.get(url).pipe(catchError(this.handleError));
+  }
+  
   private handleError(error: HttpErrorResponse) {
     console.error('HTTP Error: ', error);
     if (error.error instanceof ErrorEvent) {

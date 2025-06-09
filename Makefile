@@ -1,40 +1,23 @@
-# ----------- BACKEND -----------
+# === GLOBAL ===
+up:            ## Build + launch all containers (detached)
+	@docker compose up -d --build
 
-build-backend:
-	docker compose build backend
+down:          ## Stop and remove containers
+	@docker compose down
 
-dev-backend:
-	docker compose up backend
+logs:          ## Follow logs of all services
+	@docker compose logs -f
 
-shell-backend:
-	docker exec -it backend sh
+restart:       ## Rebuild & relaunch
+	@docker compose down
+	@docker compose up -d --build
 
+# === Shortcuts ===
+bash-backend:  ## Shell into backend container
+	@docker exec -it backend sh
 
+bash-frontend: ## Shell into frontend container
+	@docker exec -it frontend sh
 
-# build-frontend:
-# 	docker compose build frontend
-
-# dev-frontend:
-# 	docker compose up frontend
-
-# shell-frontend:
-# 	docker exec -it frontend sh
-
-# ----------- GLOBAL -----------
-
-build:
-	docker compose build
-
-up:
-	docker compose up -d
-
-down:
-	docker compose down
-
-logs:
-	docker compose logs -f
-
-restart:
-	docker compose down
-	docker compose build
-	docker compose up -d
+bash-mongo:    ## Shell into MongoDB container
+	@docker exec -it mongodb bash

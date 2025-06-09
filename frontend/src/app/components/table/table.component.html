@@ -1,29 +1,40 @@
+
 <table>
-    <thead>
-        <tr>
-            <th></th>
-            <th *ngFor="let col of cols" (click)="highlightCol(col)">
+    <thead >
+        <tr class="text-violet-400">
+            <th class="bg-indigo-400"></th>
+            <th class="bg-indigo-400 text-white cursor-pointer" *ngFor="let col of cols" (click)="highlightCol(col)">
                 {{ col }}
             </th>
         </tr>
     </thead>
-
+    
     <tbody>
         <tr *ngFor="let row of rows">
-            <th (click)="highlightRow(row)">{{ row }}</th>
-            <td *ngFor="let col of cols"
-                [ngClass]="{ 'highlight': isHightlighted(row, col)}"
-                (dblclick)="editCell(row, col)">
-                <span *ngIf="!isEditing(row, col)">
-                    {{ getCellValue(row, col) }}
-                </span>
-                    <input *ngIf="isEditing(row, col)"
-                         [(ngModel)]="editedValue"
-                         (blur)="saveCell(row, col)"
-                         (keydown.enter)="saveCell(row, col)"
-                         autofocus 
-                    />
-            </td>
-        </tr>
-    </tbody>
+            <th class="bg-indigo-400 text-white cursor-pointer"(click)="highlightRow(row)">{{ row }}</th>
+            <td class="text-indigo-300" *ngFor="let col of cols"
+            [ngClass]="{
+                'bg-indigo-200 text-white': isHightlighted(row, col),
+            }"
+            (dblclick)="editCell(row, col)">
+            <span *ngIf="!isEditing(row, col)">
+                {{ getCellValue(row, col) }}
+            </span>
+            <input *ngIf="isEditing(row, col)"
+            [(ngModel)]="editedValue"
+            (blur)="saveCell(row, col)"
+            (keydown.enter)="saveCell(row, col)"
+            autofocus 
+            />
+        </td>
+    </tr>
+</tbody>
 </table>
+<div class="flex justify-center">
+    <button 
+        (click)="reset()"
+        class="bg-indigo-300 hover:bg-indigo-200 border-indigo-400 hover:text-indigo-400 text-white font-bold
+        active:scale-95 border-2 shadow-2xl rounded-xl cursor-pointer px-8 m-4">
+        RESET
+    </button>
+</div>

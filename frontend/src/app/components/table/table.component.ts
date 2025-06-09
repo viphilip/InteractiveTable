@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { TableService, TableCell} from "../../services/table.service";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 interface CellKey {
   row: number;
   col: string;
@@ -12,7 +13,7 @@ interface CellKey {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  styleUrls: ['./table.component.output.css']
 })
 export class TableComponent implements OnInit {
   
@@ -27,7 +28,17 @@ export class TableComponent implements OnInit {
   editingCell: CellKey | null = null;
   editedValue: string = '';
   
-  constructor(private tableService: TableService) {}
+  constructor(private tableService: TableService) {
+
+    this.tableService.initTable().subscribe({
+      next: () => {
+        console.log('Table initialized');
+      },
+      error: (err) => {
+        console.error('Error while initializing table:', err.message);
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.initHeaders();
@@ -57,6 +68,17 @@ export class TableComponent implements OnInit {
   private cellKey(row: number, col: string){
     return `${row}-${col}`;
 
+  }
+
+  public reset(): void {
+    this.tableService.resetTable(true).subscribe({
+      next:() => {
+        this.initData();
+      },
+      error: err => {
+        console.error('Error while reset table:', err.message);
+      }
+    });
   }
 
   public getCellValue(row: number, col: string): string {

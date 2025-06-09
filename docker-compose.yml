@@ -1,17 +1,4 @@
 services:
-  backend:
-    build: ./backend
-    container_name: backend
-    ports:
-      - '3000:3000'
-    depends_on:
-      - mongo
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/table-test
-    volumes:
-      - ./backend:/app
-    command: npm run dev
-
   mongo:
     image: mongo
     container_name: mongodb
@@ -20,6 +7,28 @@ services:
     volumes:
       - mongo-data:/data/db
     command: ["mongod", "--quiet"]
+  backend:
+    build: ./backend
+    container_name: backend
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/table-test
+      - PORT=3000
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./backend:/app
+    command: npm run dev
+    depends_on:
+      - mongo
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - '4200:80'
+    depends_on:
+      - backend
 
 volumes:
   mongo-data:
