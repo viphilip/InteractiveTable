@@ -27,23 +27,25 @@ Une application web Angular fullstack permettant d'interagir avec un tableau dyn
 ## 📂 Structure du projet
 
 ```
-    FRONTEND (Angular)
-    └── TableComponent, TableService
-        └── GET/POST /table
+FRONTEND (Angular)
+└── TableComponent, TableService
+    └── GET/POST /table
 
-    BACKEND (Node.js)
-    └── Express, Mongoose
-        ├── table.controller.ts
-        ├── table.routes.ts
-        └── Table model (row, col, value)
+BACKEND (Node.js)
+└── Express, Mongoose
+    ├── table.controller.ts
+    ├── table.routes.ts
+    └── Table model (row, col, value)
 
-    DATABASE
-    └── MongoDB (docker)
-    
-    DOCKER
-    └── docker-compose.yml
-        └── Makefile (commandes de déploiement)
+DATABASE
+└── MongoDB (docker)
+
+DOCKER
+└── docker-compose.yml
+    └── Makefile (commandes de déploiement)
 ``` 
+
+---
 
 ## 🚀 Lancement rapide
 
