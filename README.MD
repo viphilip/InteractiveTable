@@ -48,10 +48,10 @@ Une application web Angular fullstack permettant d'interagir avec un tableau dyn
 ## 🚀 Lancement rapide
 
 ### 1. Cloner le projet
-
+```
 git clone <repo-url>
 cd <repo>
-
+```
 ### 2. Lancer tous les services (Mongo, backend, frontend)
 
 make up
