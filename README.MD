@@ -53,9 +53,10 @@ git clone <repo-url>
 cd <repo>
 ```
 ### 2. Lancer tous les services (Mongo, backend, frontend)
-
+```
 make up
-
+```
 ### 3. Accéder à l'application
-
+```
 http://localhost:4200
+```
